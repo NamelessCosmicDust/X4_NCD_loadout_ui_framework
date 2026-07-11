@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content id="ncd_loadout_ui" name="Loadout UI Framework" description="Loadout UI framework" author="NamelessCosmicDust" version="001" date="2026-07-10" save="0" enabled="1" sync="0">
+  <text language="44" name="Loadout UI Framework" description="Loadout UI framework" author="NamelessCosmicDust"/>
+  <dependency version="900"/>
+  
+  <!-- optional Kuertee UIX dependency for load order-->
+  <dependency id="ws_3477279743" optional="true" name="kuertee UI Extensions and HUD"/>
+  <dependency id="kuertee_ui_extensions" optional="true" name="kuertee UI Extensions and HUD"/>
+  <dependency id="kuerteeUIExtensionsAndHUD" optional="true" name="kuertee UI Extensions and HUD"/>
+</content>
