@@ -4,23 +4,21 @@ LoadoutUI = LoadoutUI or {}
 local ModHelper = LoadoutUI.ModHelper
 
 -- LoadoutUI.RegisterUI("mod_id", function()
---   UIX compatibility: use add for sections with UIX callbacks. Replacing Turret Behaviour
---   suppresses UIX's turret callback and can break UIX extensions.
 --   return {
 --     add = {
 --       {
 --         newname = "New Section",
 --         targetname = ReadText(1001, 2800),
---         builddata = function(context) end,
---         buildfunction = function(context, builddata, section) end,
+--         builddata = function(vanillaparams) end,
+--         buildfunction = function(vanillaparams, builddata) end,
 --       },
 --     },
 --     replace = {
 --       {
 --         newname = ReadText(1001, 2800),
 --         targetname = ReadText(1001, 2800),
---         builddata = function(context) end,
---         buildfunction = function(context, builddata, section) end,
+--         builddata = function(vanillaparams) end,
+--         buildfunction = function(vanillaparams, builddata) end,
 --       },
 --     },
 --   }

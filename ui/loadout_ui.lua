@@ -18,7 +18,7 @@ LoadoutUI.vanillaSectionOrder = {
 -- returns the modified Loadout panel function
 local function BuildWrapper(menu, originalSetupLoadoutInfoSubmenuRows)
   return function(mode, inputtable, inputobject, instance)
-    local context = {
+    local vanillaparams = {
       menu = menu,
       mode = mode,
       inputtable = inputtable,
@@ -29,7 +29,7 @@ local function BuildWrapper(menu, originalSetupLoadoutInfoSubmenuRows)
     for _, uipackage in ipairs(LoadoutUI.registeredUI) do
       local builddata = nil
       if uipackage.builddata then
-        builddata = uipackage.builddata(context)
+        builddata = uipackage.builddata(vanillaparams)
       else
         builddata = {}
       end
@@ -52,9 +52,9 @@ local function BuildWrapper(menu, originalSetupLoadoutInfoSubmenuRows)
     local currentsection = nil
     local building = 0
 
-    local function RunBuild(entry, target)
+    local function RunBuild(entry)
       building = building + 1
-      local ok, result = pcall(entry.uipackage.buildfunction, context, entry.builddata, target)
+      local ok, result = pcall(entry.uipackage.buildfunction, vanillaparams, entry.builddata)
       building = building - 1
       if not ok then
         error(result)
@@ -75,12 +75,7 @@ local function BuildWrapper(menu, originalSetupLoadoutInfoSubmenuRows)
     local function CloseSection()
       if currentsection then
         for _, entry in ipairs(currentsection.after) do
-          RunBuild(entry, {
-            matched = true,
-            newname = entry.uipackage.newname,
-            targetname = currentsection.header,
-            inputtable = inputtable,
-          })
+          RunBuild(entry)
         end
       end
       currentsection = nil
@@ -106,12 +101,7 @@ local function BuildWrapper(menu, originalSetupLoadoutInfoSubmenuRows)
 
       for _, entry in ipairs(missing) do
         entry.matched = true
-        RunBuild(entry, {
-          matched = false,
-          newname = entry.uipackage.newname,
-          targetname = entry.uipackage.targetname,
-          inputtable = inputtable,
-        })
+        RunBuild(entry)
       end
     end
 
@@ -132,12 +122,7 @@ local function BuildWrapper(menu, originalSetupLoadoutInfoSubmenuRows)
       end
 
       if replacement then
-        RunBuild(replacement, {
-          matched = true,
-          newname = replacement.uipackage.newname,
-          targetname = text,
-          inputtable = inputtable,
-        })
+        RunBuild(replacement)
         currentsection = {
           header = text,
           rowgroup = nil,
@@ -254,20 +239,10 @@ local function BuildWrapper(menu, originalSetupLoadoutInfoSubmenuRows)
     end)
 
     for _, entry in ipairs(mapped) do
-      RunBuild(entry, {
-        matched = false,
-        newname = entry.uipackage.newname,
-        targetname = entry.uipackage.targetname,
-        inputtable = inputtable,
-      })
+      RunBuild(entry)
     end
     for _, entry in ipairs(unmapped) do
-      RunBuild(entry, {
-        matched = false,
-        newname = entry.uipackage.newname,
-        targetname = entry.uipackage.targetname,
-        inputtable = inputtable,
-      })
+      RunBuild(entry)
     end
     return result
   end
