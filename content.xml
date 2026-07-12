@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<content id="ncd_loadout_ui" name="Loadout UI Framework" description="Loadout UI framework" author="NamelessCosmicDust" version="001" date="2026-07-10" save="0" enabled="1" sync="0">
+<content id="ws_3762934088" name="Loadout UI Framework" description="Loadout UI framework" author="NamelessCosmicDust" version="001" date="2026-07-11" save="0" enabled="1" sync="false" lastupdate="1783817623">
   <text language="44" name="Loadout UI Framework" description="Loadout UI framework" author="NamelessCosmicDust"/>
   <dependency version="900"/>
   
